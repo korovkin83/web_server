@@ -1,0 +1,26 @@
+var express = require('express');
+var app = express();
+
+
+var directory_www = process.argv[2];
+var port = process.argv[3];
+
+if ( (directory_www == null ) + (port == null) ) {
+	console.log('Укажите параметры!');
+	process.exit(-1);
+}
+
+app.get('/:file', function (req, res) {
+	var file = req.params["file"]
+  res.sendFile(directory_www + "/" +  file);
+});
+
+
+app.listen(port, function () {
+  console.log('Сервер запущен!');
+  console.log('Файловая директория: ' + directory_www);
+  console.log('Порт: ' + port);
+  console.log('Нажмите CTRL + C или CTRL + Z для остановки сервера!');
+});
+
+
